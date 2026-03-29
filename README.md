@@ -18,7 +18,7 @@ The goal is to keep the board small (50×50mm), simple, and educational: a low-c
 
 Design files are in **`/hw/`**. The project is made in **KiCad 9**.
 
-Prototype boards were fabricated by PCBWay using their standard 2-layer service (matte black solder mask). Assembly was done by me.
+Prototype boards were fabricated by PCBWay using their standard 2-layer service (matte black solder mask). Assembly was done by me. The project can also be find on the **PCBWay shared projects** platform at [**tinyclock002**](https://www.pcbway.com/project/shareproject/tinyclock002_5x5cm_CH32V002_devboard_with_LEDMUX_RTC_piezo_and_speaker_eas_8cf9df22.html).
 
 For a tour of the design, you can find a schematic PDF in that same folder.
 
@@ -27,7 +27,7 @@ For a tour of the design, you can find a schematic PDF in that same folder.
 - The CH32V002 runs at **48 MHz**, with **4 kB RAM** and **16 kB flash**. Simple architecture, very cost-effective for the speed.
 - Multiplexed LED circular display using a **74HC595** (structured as **4×3**) for showing time + simple animations while using only a few GPIOs.
 - **DS1302 RTC** for timekeeping, ~~with support for setting time through UART commands~~.
-  - The board allows either a **supercap** (trickle-charged by the DS1302) or a **CR2032** holder.
+  - The board allows either a **supercap** or small **rechargeable battery** (trickle-charged by the DS1302) or a **CR2032** holder.
 - UART + I²C headers for debugging and potential future expansion (not currently used in firmware).
 - **Piezo buzzer** for simple alarm sounds.
 - **Speaker output** driven by **PAM8302AAS** + filter network.
