@@ -4,8 +4,9 @@
 #include <ch32v00X_exti.h>
 #include <stdint.h>
 
-// NOTE: max 30s
 void PM_standby_init(uint32_t wakeup_ms) {
+    // TODO: if it is any longer, keep using rough granularity but periodically read RTC to check time elapsed.
+    //       with the current setup, maximum sleep time is roughly 30 seconds per call.
     if (wakeup_ms == 0 || wakeup_ms >= 30240)
         return;
 

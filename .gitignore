@@ -1,1 +1,7 @@
+compile_commands.json
 .pio
+.cache
+.vscode/**
+.clangd
+!.vscode/extensions.json
+!.vscode/settings.json

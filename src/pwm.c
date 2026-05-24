@@ -6,36 +6,38 @@
 #include <ch32v00X_misc.h>
 #include <ch32v00X_conf.h>
 
-static void tim1_ch3_pwm_init(void) {
-    RCC_PB2PeriphClockCmd(RCC_PB2Periph_TIM1 | RCC_PB2Periph_GPIOC | RCC_PB2Periph_AFIO, ENABLE);
-    GPIO_PinRemapConfig(GPIO_PartialRemap2_TIM1, ENABLE);
+// NOTE: if returning to TIM1_CH3, also change all other references to CH4 in functions below
+// TODO: make TIM1 channel selectable, T1C3 is for buzzer, T1C4 is for speaker.
+// static void tim1_ch3_pwm_init(void) {
+//     RCC_PB2PeriphClockCmd(RCC_PB2Periph_TIM1 | RCC_PB2Periph_GPIOC | RCC_PB2Periph_AFIO, ENABLE);
+//     GPIO_PinRemapConfig(GPIO_PartialRemap2_TIM1, ENABLE);
 
-    GPIO_InitTypeDef g = {0};
-    g.GPIO_Pin   = GPIO_Pin_0;
-    g.GPIO_Mode  = GPIO_Mode_AF_PP;
-    g.GPIO_Speed = GPIO_Speed_30MHz;
-    GPIO_Init(GPIOC, &g);
+//     GPIO_InitTypeDef g = {0};
+//     g.GPIO_Pin   = GPIO_Pin_0;
+//     g.GPIO_Mode  = GPIO_Mode_AF_PP;
+//     g.GPIO_Speed = GPIO_Speed_30MHz;
+//     GPIO_Init(GPIOC, &g);
 
-    TIM_TimeBaseInitTypeDef tb = {0};
-    tb.TIM_Prescaler     = 47;
-    tb.TIM_Period        = 999;
-    tb.TIM_CounterMode   = TIM_CounterMode_Up;
-    tb.TIM_ClockDivision = TIM_CKD_DIV1;
-    tb.TIM_RepetitionCounter = 0;
-    TIM_TimeBaseInit(TIM1, &tb); // 48MHz/48/1000 = 1kHz
+//     TIM_TimeBaseInitTypeDef tb = {0};
+//     tb.TIM_Prescaler     = 47;
+//     tb.TIM_Period        = 999;
+//     tb.TIM_CounterMode   = TIM_CounterMode_Up;
+//     tb.TIM_ClockDivision = TIM_CKD_DIV1;
+//     tb.TIM_RepetitionCounter = 0;
+//     TIM_TimeBaseInit(TIM1, &tb); // 48MHz/48/1000 = 1kHz
 
-    TIM_OCInitTypeDef oc = {0};
-    oc.TIM_OCMode      = TIM_OCMode_PWM1;
-    oc.TIM_OutputState = TIM_OutputState_Enable;
-    oc.TIM_Pulse       = (tb.TIM_Period + 1) >> 1;
-    oc.TIM_OCPolarity  = TIM_OCPolarity_High;
-    TIM_OC3Init(TIM1, &oc);
-    TIM_OC3PreloadConfig(TIM1, TIM_OCPreload_Enable);
+//     TIM_OCInitTypeDef oc = {0};
+//     oc.TIM_OCMode      = TIM_OCMode_PWM1;
+//     oc.TIM_OutputState = TIM_OutputState_Enable;
+//     oc.TIM_Pulse       = (tb.TIM_Period + 1) >> 1;
+//     oc.TIM_OCPolarity  = TIM_OCPolarity_High;
+//     TIM_OC3Init(TIM1, &oc);
+//     TIM_OC3PreloadConfig(TIM1, TIM_OCPreload_Enable);
 
-    TIM_ARRPreloadConfig(TIM1, ENABLE);
-    // TIM_CtrlPWMOutputs(TIM1, ENABLE);
-    TIM_Cmd(TIM1, ENABLE);
-}
+//     TIM_ARRPreloadConfig(TIM1, ENABLE);
+//     // TIM_CtrlPWMOutputs(TIM1, ENABLE);
+//     TIM_Cmd(TIM1, ENABLE);
+// }
 
 static void tim1_ch4_pwm_init(void) {
     RCC_PB2PeriphClockCmd(RCC_PB2Periph_GPIOC | RCC_PB2Periph_TIM1 | RCC_PB2Periph_AFIO, ENABLE);
